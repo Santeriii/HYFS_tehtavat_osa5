@@ -29,7 +29,9 @@ const BlogsView = ({
             <BlogForm handleBlogSubmit={handleBlogSubmit} setTitle={setTitle} setAuthor={setAuthor} setUrl={setUrl} title={title} author={author} url={url} />
         </Togglable>
         <br/><br/>
-        {blogs.map(blog =>
+        {blogs.sort(function(a, b) {
+            return b.likes - a.likes
+        }).map(blog =>
           <Blog key={blog.id} blog={blog} />
         )}
       </>
