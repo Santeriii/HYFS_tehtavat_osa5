@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import blogService from '../services/blogs'
 
 const Blog = ({blog}) => {
   const [fullData, setFullData] = useState(false)
@@ -15,6 +16,22 @@ const Blog = ({blog}) => {
     marginBottom: 5
   }
 
+  const like = () => {
+    try {
+      const likedBlog = {
+        likes: blog.likes + 1,
+        author: blog.author,
+        title: blog.title,
+        url: blog.url,
+        id: blog.id
+      }
+
+      blogService.update(likedBlog)
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+
   return (
     !fullData ? (
       <div style={blogStyle}>
@@ -28,7 +45,7 @@ const Blog = ({blog}) => {
         {blog.title}<button onClick={handleFullData}>hide</button><br/>
         {blog.url}<br/>
         likes {blog.likes}
-        <button>like</button><br/>
+        <button onClick={like}>like</button><br/>
         {blog.author}<br/>
       </div>
     )
