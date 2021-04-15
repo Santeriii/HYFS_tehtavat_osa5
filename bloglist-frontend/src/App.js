@@ -11,6 +11,8 @@ const App = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -43,6 +45,11 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (exception) {
+      setErrorMessage('wrong username or password')
+
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
       console.log(exception)
     }
   }
@@ -59,15 +66,42 @@ const App = () => {
 
       const createdBlog = await blogService.create(blog)
       setBlogs(blogs.concat(createdBlog))
+
+      setNotification(`a new blog ${blog.title} by ${blog.author} added`)
+
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+      setTitle('')
+      setAuthor('')
+      setUrl('')
     } catch (exception) {
       console.log(exception)
+      setErrorMessage(`blog creation failed`)
+
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
+  }
+
+  const notificationForm = () => {
+    return (
+      <h1 style={{ color: 'green '}}>{notification}</h1>
+    )
+  }
+
+  const errorForm = () => {
+    return (
+      <h1 style={{ color: 'red' }}>{errorMessage}</h1>
+    )
   }
 
   const loginForm = () => {
     return (
       <>
         <h2>log in to application</h2>
+          {errorMessage && errorForm()}
           <form onSubmit={handleLogin}>
             <div>
               username
@@ -134,6 +168,8 @@ const App = () => {
     return (
       <>
         <h2>blogs</h2>
+        {notification && notificationForm()}
+        {errorMessage && errorForm()}
         {user.name} logged in
         <button onClick={() => window.localStorage.removeItem('loggedBlogappUser')}>logout</button><br/>
         {blogForm()}
