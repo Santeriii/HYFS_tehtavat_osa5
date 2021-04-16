@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({blog}) => {
+const Blog = ({blog, user}) => {
   const [fullData, setFullData] = useState(false)
 
   const handleFullData = () => {
@@ -32,6 +32,15 @@ const Blog = ({blog}) => {
     }
   }
 
+  const handleRemove = () => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`))
+    try {
+      blogService.remove(blog.id)
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+
   return (
     !fullData ? (
       <div style={blogStyle}>
@@ -47,6 +56,10 @@ const Blog = ({blog}) => {
         likes {blog.likes}
         <button onClick={like}>like</button><br/>
         {blog.author}<br/>
+        {blog.user && 
+            blog.user.username === user.username &&
+              <button onClick={handleRemove}>remove</button>
+        }
       </div>
     )
   )
