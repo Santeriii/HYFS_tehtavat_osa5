@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    
+
     try {
       const user = await loginService.login({
         username, password,
@@ -78,7 +78,7 @@ const App = () => {
       setUrl('')
     } catch (exception) {
       console.log(exception)
-      setErrorMessage(`blog creation failed`)
+      setErrorMessage('blog creation failed')
 
       setTimeout(() => {
         setErrorMessage(null)

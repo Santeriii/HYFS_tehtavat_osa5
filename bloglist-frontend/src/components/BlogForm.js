@@ -2,58 +2,58 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const BlogForm = ({
-    handleBlogSubmit,
-    setTitle,
-    setAuthor,
-    setUrl,
-    title,
-    author,
-    url
+  handleBlogSubmit,
+  setTitle,
+  setAuthor,
+  setUrl,
+  title,
+  author,
+  url
 }) => {
-    return (
-      <form onSubmit={handleBlogSubmit}>
-        <h2>create new</h2>
-        <br/>
-        <div>
+  return (
+    <form onSubmit={handleBlogSubmit}>
+      <h2>create new</h2>
+      <br/>
+      <div>
           title:
-          <input
+        <input
           type="text"
           value={title}
           name="Title"
           onChange={({ target }) => setTitle(target.value)}
-          />
-        </div>
-        <div>
+        />
+      </div>
+      <div>
           author:
-          <input
+        <input
           type="text"
           value={author}
           name="Author"
           onChange={({ target }) => setAuthor(target.value)}
-          />
-        </div>
-        <div>
+        />
+      </div>
+      <div>
           url:
-          <input
+        <input
           type="text"
           value={url}
           name="Url"
           onChange={({ target }) => setUrl(target.value)}
-          />
-        </div>
-        <button type="submit">create</button>
-      </form>
-    )
+        />
+      </div>
+      <button type="submit">create</button>
+    </form>
+  )
 }
 
 BlogForm.propTypes = {
-    handleBlogSubmit: PropTypes.func.isRequired,
-    setTitle: PropTypes.func.isRequired,
-    setAuthor: PropTypes.func.isRequired,
-    setUrl: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
+  handleBlogSubmit: PropTypes.func.isRequired,
+  setTitle: PropTypes.func.isRequired,
+  setAuthor: PropTypes.func.isRequired,
+  setUrl: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 }
 
 export default BlogForm

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
 
-const Blog = ({blog, user}) => {
+const Blog = ({ blog, user }) => {
   const [fullData, setFullData] = useState(false)
 
   const handleFullData = () => {
@@ -35,11 +35,11 @@ const Blog = ({blog, user}) => {
 
   const handleRemove = () => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`))
-    try {
-      blogService.remove(blog.id)
-    } catch (exception) {
-      console.log(exception)
-    }
+      try {
+        blogService.remove(blog.id)
+      } catch (exception) {
+        console.log(exception)
+      }
   }
 
   return (
@@ -49,20 +49,20 @@ const Blog = ({blog, user}) => {
         <button onClick={handleFullData}>view</button>
       </div>
     )
-    :
-    (
-      <div style={blogStyle}>
-        {blog.title}<button onClick={handleFullData}>hide</button><br/>
-        {blog.url}<br/>
+      :
+      (
+        <div style={blogStyle}>
+          {blog.title}<button onClick={handleFullData}>hide</button><br/>
+          {blog.url}<br/>
         likes {blog.likes}
-        <button onClick={like}>like</button><br/>
-        {blog.author}<br/>
-        {blog.user && 
+          <button onClick={like}>like</button><br/>
+          {blog.author}<br/>
+          {blog.user &&
             blog.user.username === user.username &&
               <button onClick={handleRemove}>remove</button>
-        }
-      </div>
-    )
+          }
+        </div>
+      )
   )
 }
 
