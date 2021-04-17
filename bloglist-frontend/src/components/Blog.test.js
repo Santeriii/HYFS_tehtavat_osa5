@@ -71,3 +71,31 @@ test('after clicking the "view"-button of the blog the data of the likes and the
         2
     )
 })
+
+test('when clicked twice, the "like"-button triggers its" functionality twice', () => {
+    const blog = {
+        title: 'Testiblogi',
+        author: 'Testaaja',
+        url: 'testiblogi.com',
+        likes: 2
+    }
+
+    const user = {
+        username: 'peke'
+    }
+
+    const mockHandler = jest.fn()
+
+    const component = render(
+        <Blog blog={blog} user={user} likeTest={mockHandler} />
+    )
+
+    const viewButton = component.getByText('view')
+    fireEvent.click(viewButton)
+
+    const likeButton = component.getByText('like')
+    fireEvent.click(likeButton)
+    fireEvent.click(likeButton)
+
+    expect(mockHandler.mock.calls).toHaveLength(2)
+})

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
 
-const Blog = ({ blog, user }) => {
+const Blog = ({ blog, user, likeTest }) => {
   const [fullData, setFullData] = useState(false)
 
   const handleFullData = () => {
@@ -18,6 +18,8 @@ const Blog = ({ blog, user }) => {
   }
 
   const like = () => {
+    likeTest()
+
     try {
       const likedBlog = {
         likes: blog.likes + 1,

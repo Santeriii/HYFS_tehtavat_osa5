@@ -18,6 +18,11 @@ const BlogsView = ({
   url,
   blogs
 }) => {
+
+    const likeTest = () => {
+        
+    }
+    
   return (
     <>
       <h2>blogs</h2>
@@ -32,7 +37,7 @@ const BlogsView = ({
       {blogs.sort(function(a, b) {
         return b.likes - a.likes
       }).map(blog =>
-        <Blog key={blog.id} blog={blog} user={user} />
+        <Blog key={blog.id} blog={blog} user={user} likeTest={likeTest} />
       )}
     </>
   )
