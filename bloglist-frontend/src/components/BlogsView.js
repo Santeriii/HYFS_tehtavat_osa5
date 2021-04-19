@@ -19,10 +19,10 @@ const BlogsView = ({
   blogs
 }) => {
 
-    const likeTest = () => {
-        
-    }
-    
+  const likeTest = () => {
+
+  }
+
   return (
     <>
       <h2>blogs</h2>

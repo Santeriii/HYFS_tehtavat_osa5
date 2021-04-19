@@ -55,14 +55,14 @@ const App = () => {
     }
   }
 
-  const handleBlogSubmit = async (event) => {
+  const handleBlogSubmit = async (props) => {
     event.preventDefault()
 
     try {
       const blog = {
-        title: title,
-        author: author,
-        url: url
+        title: props.title,
+        author: props.author,
+        url: props.url
       }
 
       const createdBlog = await blogService.create(blog)
