@@ -66,7 +66,7 @@ describe('Blog app', function() {
       cy.contains('A new blog').parent().contains(1)
     })
 
-    it.only('A blog can be deleted', function() {
+    it('A blog can be deleted', function() {
       cy.get('#logout').click()
       cy.visit('http://localhost:3000')
       cy.get('#username').type('testi')
@@ -77,6 +77,33 @@ describe('Blog app', function() {
       cy.on('window:confirm', () => true)
       cy.visit('http://localhost:3000')
       cy.get('html').should('not.contain', 'A new blog')
+    })
+
+    it('The blogs are shown in a descending order sorted by the like count', function() {
+      cy.get('#title').type('A second new blog')
+      cy.get('#author').type('Test User')
+      cy.get('#url').type('testblog.com')
+      cy.get('#create').click()
+
+      cy.get('#title').type('A third new blog')
+      cy.get('#author').type('Test User')
+      cy.get('#url').type('testblog.com')
+      cy.get('#create').click()
+      cy.visit('http://localhost:3000')
+
+      cy.contains('A second new blog').contains('view').click()
+      cy.contains('A second new blog').contains('like').click()
+      cy.visit('http://localhost:3000')
+
+      cy.contains('A second new blog').contains('view').click()
+      cy.contains('A second new blog').contains('like').click()
+      cy.visit('http://localhost:3000')
+
+      cy.contains('A third new blog').contains('view').click()
+      cy.contains('A third new blog').contains('like').click()
+      cy.visit('http://localhost:3000')
+
+      cy.get('#view-button').parent().contains('A second new blog')
     })
   })
 })
