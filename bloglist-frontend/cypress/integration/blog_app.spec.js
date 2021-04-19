@@ -46,16 +46,24 @@ describe('Blog app', function() {
       cy.get('#username').type('testi')
       cy.get('#password').type('testi')
       cy.get('#login-button').click()
-    })
-
-    it('A blog can be created', function() {
       cy.contains('new blog').click()
       cy.get('#title').type('A new blog')
       cy.get('#author').type('Test User')
       cy.get('#url').type('testblog.com')
       cy.get('#create').click()
+    })
+
+    it('A blog can be created', function() {
       cy.contains('A new blog')
       cy.contains('Test User')
+    })
+
+    it('A blog can be liked', function() {
+      cy.get('#view-button').click()
+      cy.get('#like-button').click()
+      cy.visit('http://localhost:3000')
+      cy.get('#view-button').click()
+      cy.contains('A new blog').parent().contains(1)
     })
   })
 })

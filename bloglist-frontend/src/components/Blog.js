@@ -48,7 +48,10 @@ const Blog = ({ blog, user, likeTest }) => {
     !fullData ? (
       <div style={blogStyle}>
         {blog.title} {blog.author}
-        <button onClick={handleFullData}>view</button>
+        <button
+          onClick={handleFullData}
+          id='view-button'
+        >view</button>
       </div>
     )
       :
@@ -57,7 +60,10 @@ const Blog = ({ blog, user, likeTest }) => {
           {blog.title}<button onClick={handleFullData}>hide</button><br/>
           {blog.url}<br/>
         likes {blog.likes}
-          <button onClick={like}>like</button><br/>
+          <button
+            onClick={like}
+            id='like-button'
+          >like</button><br/>
           {blog.author}<br/>
           {blog.user &&
             blog.user.username === user.username &&
