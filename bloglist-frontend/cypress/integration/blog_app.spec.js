@@ -65,5 +65,18 @@ describe('Blog app', function() {
       cy.get('#view-button').click()
       cy.contains('A new blog').parent().contains(1)
     })
+
+    it.only('A blog can be deleted', function() {
+      cy.get('#logout').click()
+      cy.visit('http://localhost:3000')
+      cy.get('#username').type('testi')
+      cy.get('#password').type('testi')
+      cy.get('#login-button').click()
+      cy.get('#view-button').click()
+      cy.get('#remove-button').click()
+      cy.on('window:confirm', () => true)
+      cy.visit('http://localhost:3000')
+      cy.get('html').should('not.contain', 'A new blog')
+    })
   })
 })

@@ -29,7 +29,10 @@ const BlogsView = ({
       {notification && <NotificationForm notification={notification} />}
       {errorMessage && <ErrorForm errorMessage={errorMessage} />}
       {user.name} logged in
-      <button onClick={() => window.localStorage.removeItem('loggedBlogappUser')}>logout</button><br/>
+      <button
+        onClick={() => window.localStorage.removeItem('loggedBlogappUser')}
+        id='logout'
+      >logout</button><br/>
       <Togglable buttonLabel="new blog">
         <BlogForm handleBlogSubmit={handleBlogSubmit} setTitle={setTitle} setAuthor={setAuthor} setUrl={setUrl} title={title} author={author} url={url} />
       </Togglable>
